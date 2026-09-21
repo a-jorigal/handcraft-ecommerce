@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Order Successful | ArtisanCrafts</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../static/style.css">
+
+<style>
+
+.success-section{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:70vh;
+    padding:40px;
+}
+
+.success-card{
+
+    background:white;
+    padding:50px;
+    border-radius:12px;
+    text-align:center;
+    max-width:520px;
+    width:100%;
+
+    box-shadow:0 8px 30px rgba(0,0,0,0.08);
+}
+
+.success-icon{
+    font-size:70px;
+    color:#2ecc71;
+    margin-bottom:20px;
+}
+
+.success-card h2{
+    font-family:'Playfair Display', serif;
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.success-card p{
+    color:#666;
+    font-size:16px;
+}
+
+.order-info{
+    margin-top:20px;
+    padding:15px;
+    background:#f7f7f7;
+    border-radius:8px;
+}
+
+.success-buttons{
+    margin-top:30px;
+}
+
+.success-buttons a{
+
+    text-decoration:none;
+    padding:12px 25px;
+    border-radius:6px;
+    margin:10px;
+    display:inline-block;
+    font-weight:600;
+}
+
+.btn-shop{
+    background:var(--primary-color);
+    color:white;
+}
+
+.btn-orders{
+    background:#333;
+    color:white;
+}
+
+.btn-shop:hover{
+    opacity:0.9;
+}
+
+.btn-orders:hover{
+    opacity:0.9;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+<!-- Navbar -->
+<header class="main-header">
+
+<div class="logo">
+<a href="{{url_for('index')}}">Artisan<span>Crafts</span></a>
+</div>
+
+<nav class="nav-links">
+<a href="{{url_for('index')}}">Home</a>
+<a href="{{url_for('products')}}">Products</a>
+<a href="{{url_for('aboutus')}}">About</a>
+<a href="{{url_for('contact')}}">Contact</a>
+<a href="{{url_for('logout')}}" class="nav-btn">Logout</a>
+</nav>
+
+</header>
+
+
+<!-- Success Section -->
+
+<section class="success-section">
+
+<div class="success-card">
+
+<div class="success-icon">
+✔
+</div>
+
+<h2>Order Placed Successfully!</h2>
+
+<p>Thank you for shopping with ArtisanCrafts.</p>
+
+<div class="order-info">
+<p>Your order has been received and is being processed.</p>
+<p>You will receive updates about shipping soon.</p>
+</div>
+
+<div class="success-buttons">
+
+<a href="{{url_for('products')}}" class="btn-shop">
+Continue Shopping
+</a>
+
+<a href="{{url_for('orders')}}" class="btn-orders">
+View My Orders
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- Footer -->
+
+<footer class="main-footer">
+
+<div class="footer-content">
+
+<div class="footer-brand">
+<h2>Artisan<span>Crafts</span></h2>
+<p>Curated handmade decor for the mindful home.</p>
+</div>
+
+<div class="footer-links">
+<h3>Shop</h3>
+<ul>
+<li><a href="{{url_for('products')}}">Wall Hangings</a></li>
+<li><a href="{{url_for('products')}}">Pottery</a></li>
+<li><a href="{{url_for('products')}}">Baskets</a></li>
+</ul>
+</div>
+
+<div class="footer-links">
+<h3>Support</h3>
+<ul>
+<li><a href="#">FAQ</a></li>
+<li><a href="{{url_for('contact')}}">Contact Us</a></li>
+</ul>
+</div>
+
+</div>
+
+<div class="footer-bottom">
+<p>&copy; 2026 ArtisanCrafts. All rights reserved.</p>
+</div>
+
+</footer>
+
+</div>
+
+</body>
+</html>

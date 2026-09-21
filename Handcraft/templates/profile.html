@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>My Profile | ArtisanCrafts</title>
+
+ <link rel="stylesheet" href="../static/style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="main-header">
+        <div class="logo">
+          <a href="{{url_for('index')}}">Artisan<span>Crafts</span></a>
+        </div>
+
+    <nav class="nav-links">
+      <a href="{{url_for('index')}}">Home</a>
+      <a href="{{url_for('products')}}">Products</a>
+      <a href="{{url_for('aboutus')}}">About Us</a>
+      <a href="{{url_for('contact')}}">Contact</a>
+      <a href="{{ url_for('cart') }}" class="cart-icon">🛒<span class="cart-count">{{ cart_count }}</span></a>
+      <a href="{{url_for('my_orders')}}">My orders</a>
+      <a href="{{url_for('profile')}}" class="nav-btn">My profile</a>
+      <a href="{{url_for('logout')}}" class="nav-btn">Logout</a>
+    </nav>
+</header>
+
+
+<main class="profile-container">
+
+<h2>My Profile</h2>
+
+<div class="profile-card">
+
+<h3>{{ user.full_name }}</h3>
+<p>{{ user.email }}</p>
+
+</div>
+
+
+<h2>My Orders</h2>
+
+
+
+<table>
+
+<tr>
+<th>Order ID</th>
+<th>Product</th>
+<th>Price</th>
+<th>Status</th>
+<th>Bill</th>
+</tr>
+
+{% for order in orders %}
+
+<tr>
+
+<td>{{ order.order_id }}</td>
+
+<td>{{ order.product_name }}</td>
+
+<td>₹{{ order.price }}</td>
+
+<td>{{ order.order_status }}</td>
+
+<td>
+<a href="{{ url_for('invoice_single', order_id=order.order_id) }}">
+View Bill
+</a>
+{% if order.order_status == 'Pending' %}
+    <a href="{{ url_for('cancel_order', order_id=order.order_id) }}" 
+       style="background:red; margin-left:5px;">
+       Cancel
+    </a>
+{% endif %}
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</main>
+
+
+<!-- FOOTER -->
+
+  <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h2>Artisan<span>Crafts</span></h2>
+                    <p>Curated handmade decor for the mindful home.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="{{url_for('products')}}">Wall Hangings</a></li>
+                        <li><a href="{{url_for('products')}}">Pottery</a></li>
+                        <li><a href="{{url_for('products')}}">Baskets</a></li>
+                        <li><a href="{{url_for('products')}}">New Arrivals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="{{url_for('contact')}}">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ArtisanCrafts. All rights reserved.</p>
+            </div>
+        </footer>
+
+</body>
+</html>

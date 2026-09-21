@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Document</title>
+    <script>
+
+       function showQR(){
+
+         var method=document.getElementById("payment_method").value;
+
+           if(method=="online"){
+             document.getElementById("qr-section").style.display="block";
+             document.getElementById("place-order-btn").disabled=true;
+            }
+           else{
+                document.getElementById("qr-section").style.display="none";
+                document.getElementById("place-order-btn").disabled=false;
+             }
+
+            }
+
+        // function paymentDone(){
+
+        //      alert("Payment Received Successfully");
+
+        //  document.getElementById("place-order-btn").disabled=false;
+
+        // }
+        </script>
+        <script>
+            function paymentDone(){
+
+               alert("Payment Recorded!");
+
+                var form = document.querySelector("form");
+
+     
+                var input = document.createElement("input");
+                input.type = "hidden";
+                input.name = "payment_id";
+                input.value = "UPI12345";   // simple fixed value
+
+                form.appendChild(input);
+
+   
+    document.getElementById("payment_method").value = "online";
+
+    document.getElementById("place-order-btn").disabled=false
+    
+}
+</script>
+
+
+
+</head>
+<body>
+
+    <h2 class="checkout-title">Checkout</h2>
+
+<div class="checkout-container">
+
+    <!-- Product Summary -->
+    <div class="product-summary">
+        <h3>Product Details</h3>
+        <img src="{{ url_for('static', filename='images/' + product.image_name) }}">
+        <p class="product-name">{{ product.product_name }}</p>
+        <p class="product-price">Price: ₹{{ product.price }}</p>
+    </div>
+
+    <!-- Checkout Form -->
+    <form action="/place_order" method="POST" class="checkout-form">
+
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+
+        <h3>Shipping Details</h3>
+
+        <input type="text" name="fullname" placeholder="Full Name" required>
+
+        <input type="text" name="address" placeholder="Address" required>
+
+        <input type="text" name="city" placeholder="City" required>
+
+        <input type="text" name="pincode" placeholder="Pincode" required>
+        <input type="text" name="state" placeholder="Enter State" required>
+
+        <input type="number" name="quantity" value="1">
+
+        <h3>Payment Method</h3>
+
+        <select name="payment_method" id="payment_method" onchange="showQR()">
+            <option value="cod">Cash on Delivery</option>
+            <option value="online">Online Payment</option>
+        </select>
+         <div id="qr-section" style="display:none;text-align:center;margin-top:15px;">
+
+        <h3>Scan & Pay</h3>
+
+         <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=akshad@upi&pn=Akshad&am={{product.price}}&cu=INR">
+
+        <p>Scan using UPI apps</p>
+
+        <button type="button" onclick="paymentDone()" class="pay-btn">
+           I Have Paid
+        </button>
+
+        </div>
+
+
+        <button type="submit" id="place-order-btn" class="place-order-btn">Place Order</button>
+       
+
+    </form>
+
+</div>
+</body>
+</html>

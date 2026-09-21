@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | ArtisanCrafts</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Global Navbar -->
+        <header class="main-header">
+            <div class="logo">
+                <a href="{{url_for('index')}}">Artisan<span>Crafts</span></a>
+            </div>
+            <nav class="nav-links">
+                <a href="{{url_for('index')}}">Home</a>
+                <a href="{{url_for('products')}}">Products</a>
+                <a href="{{url_for('aboutus')}}" style="color: var(--primary-color);">About Us</a>
+                <a href="{{url_for('contact')}}">Contact</a>
+               <a href="{{ url_for('cart') }}" class="cart-icon">🛒<span class="cart-count">{{ cart_count }}</span></a>
+               <a href="{{url_for('my_orders')}}">My orders</a>
+                <a href="{{url_for('profile')}}" class="nav-btn">My profile</a>
+                <a href="{{url_for('logout')}}" class="nav-btn">logout</a>
+            </nav>
+        </header>
+
+        <main class="landing-main">
+            <!-- Craftsmanship Section -->
+            <section id="aboutus" class="about-section" style="min-height: calc(100vh - 400px);">
+                <div class="about-content">
+                    <h2>About Us</h2>
+                    <p>We believe in the power of handmade goods. Every knot, every mold, and every weave is a testament
+                        to the dedication of independent artisans bringing natural beauty into the modern home. Our
+                        journey started with a simple belief: that your home should reflect who you are, filled with
+                        items that have a story.</p>
+                    <a href="{{url_for('contact')}}" class="btn btn-outline">Get in Touch</a>
+                </div>
+                <div class="about-image">
+                    <!-- Placeholder color inherited or can use another image -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h2>Artisan<span>Crafts</span></h2>
+                    <p>Curated handmade decor for the mindful home.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="{{url_for('products')}}">Wall Hangings</a></li>
+                        <li><a href="{{url_for('products')}}">Pottery</a></li>
+                        <li><a href="{{url_for('products')}}">Baskets</a></li>
+                        <li><a href="{{url_for('products')}}">New Arrivals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="{{url_for('contact')}}">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ArtisanCrafts. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

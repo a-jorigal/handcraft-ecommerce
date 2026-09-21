@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers | ArtisanCrafts Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <a href="#">Artisan<span>Crafts</span></a>
+                <span class="admin-badge">Admin</span>
+            </div>
+            <nav class="admin-nav">
+                <a href="{{ url_for('admin') }}"><i class="fa-solid fa-box"></i> Products</a>
+                <a href="{{ url_for('admin') }}"><i class="fa-solid fa-box"></i> orders</a>
+                <a href="{{ url_for('customers') }}" class="active"><i class="fa-solid fa-users"></i> Customers</a>
+            </nav>
+            <div class="admin-logout">
+                <a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h2>Registered Customers</h2>
+                <div class="admin-user">
+                    <span>Welcome, Admin</span>
+                    <i class="fa-solid fa-circle-user"></i>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <div class="admin-table-container">
+                    <table class="admin-table">
+
+                    <thead>
+                       <tr>
+                        <th>Order ID</th>
+                        <th>Product</th>
+                        <th>Image</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+
+                     {% for o in orders %}
+
+                     <tr>
+
+                       <td>{{ o.order_id }}</td>
+
+<td>{{ o.product_name }}</td>
+
+<td>
+<img src="{{ url_for('static', filename='images/' ~ (o.product_image or 'default.png')) }}"
+class="admin-product-img">
+</td>
+
+<td>₹{{ o.price }}</td>
+
+<td>{{ o.quantity }}</td>
+
+<td>{{ o.order_status }}</td>
+
+<td>{{ o.order_date }}</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

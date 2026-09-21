@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Invoice</title>
+
+<link rel="stylesheet" href="../static/style.css">
+
+<style>
+
+.invoice-container{
+width:700px;
+margin:40px auto;
+background:#fff;
+padding:30px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.invoice-header{
+display:flex;
+justify-content:space-between;
+margin-bottom:20px;
+}
+
+.invoice-header h2{
+color:#b88e2f;
+}
+
+.invoice-table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+.invoice-table th,
+.invoice-table td{
+padding:10px;
+border-bottom:1px solid #ddd;
+text-align:left;
+}
+
+.total{
+text-align:right;
+font-size:18px;
+font-weight:bold;
+margin-top:20px;
+}
+
+.print-btn{
+margin-top:20px;
+padding:10px 20px;
+background:#b88e2f;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="invoice-container">
+
+<div class="invoice-header">
+
+<h2>ArtisanCrafts Invoice</h2>
+
+<p>Order ID: {{ order.order_id }}</p>
+
+</div>
+
+<p><b>Date:</b> {{ order.order_date }}</p>
+
+<hr>
+
+<h3>Customer Details</h3>
+
+<p><b>Name:</b> {{ order.fullname }}</p>
+<p><b>Address:</b> {{ order.address }}</p>
+<p><b>City:</b> {{ order.city }}</p>
+<p><b>Pincode:</b> {{ order.pincode }}</p>
+<p><b>State:</b> {{ order.state }}</p>
+
+<hr>
+
+<h3>Product Details</h3>
+
+<table class="invoice-table">
+
+<tr>
+<th>Product</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Total</th>
+</tr>
+
+<tr>
+
+<td>{{ order.product_name }}</td>
+<td>₹{{ order.price }}</td>
+<td>{{ order.quantity }}</td>
+<td>₹{{order.price }}</td>
+
+</tr>
+
+</table>
+
+<div class="total">
+Total Amount: ₹{{ order.price }}
+</div>
+
+<p><b>Payment Method:</b> {{ order.payment_method }}</p>
+
+<button onclick="window.print()" class="print-btn">
+Print Bill
+</button>
+
+</div>
+
+</body>
+</html>

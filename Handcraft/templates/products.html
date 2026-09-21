@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | ArtisanCrafts</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Global Navbar -->
+        <header class="main-header">
+            <div class="logo">
+                <a href="{{url_for('index')}}">Artisan<span>Crafts</span></a>
+            </div>
+            <nav class="nav-links">
+                <a href ="{{ url_for('index')}}">Home</a>
+                <a href="{{url_for('products')}}" style="color: var(--primary-color);">Products</a>
+                <a href="{{url_for('aboutus')}}">About Us</a>
+                <a href="{{url_for('contact')}}">Contact</a>
+                <a href="{{ url_for('cart') }}" class="cart-icon">🛒<span class="cart-count">{{ cart_count }}</span></a>
+                <a href="{{url_for('my_orders')}}">My orders</a>
+                <a href="{{url_for('profile')}}" class="nav-btn">My profile</a>
+                <a href="{{url_for('logout')}}" class="nav-btn">logout</a>
+            </nav>
+        </header>
+
+        <main class="landing-main">
+            <!-- Featured Collection -->
+            <section id="products" class="featured-collection" style="padding-top: 2rem;">
+                <div class="section-header">
+                    <h2>Our Products</h2>
+                    <p>Our most loved hand-crafted items for the season</p>
+                </div>
+
+                <div class="product-grid">
+                    {% for p in products %}
+                    <div class="product-card">
+                        <div class="product-img-wrapper">
+                            <img src="{{ url_for('static', filename='images/' + p.image_name) }}"
+                                alt="{{ p.product_name }}">
+                            <!-- <button class="add-to-cart-btn">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button> -->
+                            <form action="{{ url_for('add_to_cart', product_id=p.id) }}" method="POST">
+                                 <button type="submit" class="add-to-cart-btn">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                 </button>
+                            </form>
+                        </div>
+                        <div class="product-info">
+                            <span class="category">{{ p.category }}</span>
+                            <h3>{{ p.product_name }}</h3>
+                              <!-- {% if p.avg_rating %}
+                                <p>⭐ {{ p.avg_rating|round(1) }}/5 ({{ p.total_reviews }} reviews)</p>
+                              {% else %}
+                                <p>No ratings yet</p>
+                              {% endif %} -->
+                            <div class="reviews">
+                             {% for r in p.reviews %}
+                              <div class="review-box">
+                                 <p>⭐ {{ r.rating }}/5</p>
+                                <p>{{ r.comment }}</p>
+                              </div>
+                             {% endfor %}
+                            </div>
+                            <span class="price">RS:{{ "%.2f"|format(p.price) }}</span>
+                        </div>
+                         
+
+                       
+                        
+                            <a href="{{ url_for('buy_now', product_id=p.id) }}">
+                                <button class="btn btn-primary btn-block">Buy Now</button>
+                            </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h2>Artisan<span>Crafts</span></h2>
+                    <p>Curated handmade decor for the mindful home.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="{{url_for('products')}}">Wall Hangings</a></li>
+                        <li><a href="{{url_for('products')}}">Pottery</a></li>
+                        <li><a href="{{url_for('products')}}">Baskets</a></li>
+                        <li><a href="{{url_for('products')}}">New Arrivals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="{{url_for('contact')}}">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ArtisanCrafts. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

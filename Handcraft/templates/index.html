@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArtisanCrafts | Premium Handmade Home Decor</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Global Navbar -->
+        <header class="main-header">
+            <div class="logo">
+                <a href="{{url_for('index')}}">Artisan<span>Crafts</span></a>
+            </div>
+            <nav class="nav-links">
+                <a href="{{url_for('index')}}"style="color: var(--primary-color);">Home</a>
+                <a href="{{url_for('products')}}">Products</a>
+                <a href="{{url_for('aboutus')}}">About Us</a>
+                <a href="{{url_for('contact')}}">Contact</a>
+               <a href="{{ url_for('cart') }}" class="cart-icon">🛒<span class="cart-count">{{ cart_count }}</span></a>
+               <a href="{{url_for('my_orders')}}">My orders</a>
+                <a href="{{url_for('profile')}}"  class="nav-btn">My Profile</a>
+                <a href="{{url_for('logout')}}" class="nav-btn">logout</a>
+            </nav>
+        </header>
+
+        <main class="landing-main">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-overlay">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Elevate Your Space with Handcrafted Art</h1>
+                        <p class="hero-subtitle">Discover unique, woven decor and rustic treasures crafted by
+                            independent artisans.</p>
+                        <a href="{{url_for('products')}}" class="btn btn-primary hero-btn">Explore Collection</a>
+                    </div>
+                </div>
+            </section>
+            <!-- Best Sellers Section -->
+             <!-- Best Seller Section -->
+            <section class="best-seller">
+               <h2 class="section-title">Best Sellers</h2>
+               <div class="product-grid">
+                    {% for p in products %}
+                    <div class="product-card">
+                        <div class="product-img-wrapper">
+                            <img src="{{ url_for('static', filename='images/' + p.image_name) }}"
+                                alt="{{ p.product_name }}">
+                            <button class="add-to-cart-btn">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <span class="category">{{ p.category }}</span>
+                            <h3>{{ p.product_name }}</h3>
+                            <span class="price">RS:{{ "%.2f"|format(p.price) }}</span>
+                        </div>
+                            <a href="{{ url_for('buy_now', product_id=p.id) }}">
+                                <button class="btn btn-primary btn-block">Buy Now</button>
+                            </a>
+                    </div>
+                    {% endfor %}
+                </div>
+               
+
+                   
+            </section>
+        
+
+
+            <!-- Attributes Section -->
+            <section class="features-section">
+                <div class="feature-box">
+                    <i class="fa-solid fa-leaf"></i>
+                    <h3>Sustainable Materials</h3>
+                    <p>Crafted with natural, eco-friendly fibers and clay.</p>
+                </div>
+                <div class="feature-box">
+                    <i class="fa-solid fa-hands-holding-circle"></i>
+                    <h3>Handmade with Love</h3>
+                    <p>Every piece is uniquely crafted by skilled artisans.</p>
+                </div>
+                <div class="feature-box">
+                    <i class="fa-solid fa-house-chimney"></i>
+                    <h3>Earthy Aesthetics</h3>
+                    <p>Designed to bring warmth and texture into your home.</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h2>Artisan<span>Crafts</span></h2>
+                    <p>Curated handmade decor for the mindful home.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="{{url_for('products')}}">Wall Hangings</a></li>
+                        <li><a href="{{url_for('products')}}">Pottery</a></li>
+                        <li><a href="{{url_for('products')}}">Baskets</a></li>
+                        <li><a href="{{url_for('products')}}">New Arrivals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="{{url_for('contact')}}">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ArtisanCrafts. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create an Account | ArtisanCrafts</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Global Navbar -->
+        <header class="main-header">
+            <div class="logo">
+                <a href="#">Artisan<span>Crafts</span></a>
+            </div>
+        </header>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+        <main class="main-content">
+            <div class="auth-wrapper">
+                <div class="auth-split">
+                    <!-- Left Image Side -->
+                    <div class="auth-image-side register-image">
+                        <div class="auth-image-overlay">
+                            <h1 class="brand-title">Artisan<span>Crafts</span></h1>
+                            <p class="brand-subtitle">Join our community of makers and lovers of unique crafts.</p>
+                        </div>
+                    </div>
+
+                    <!-- Right Form Side -->
+                    <div class="auth-form-side">
+                        <div class="form-container">
+                            <div class="form-header">
+                                <h2>Create an Account</h2>
+                                <p>Sign up to start exploring exclusive artisan goods.</p>
+                            </div>
+
+
+                            <form action="/register" method="POST" class="auth-form">
+                                <div class="input-group">
+                                    <label for="name">Full Name</label>
+                                    <div class="input-icon-wrapper">
+                                        <i class="fa-regular fa-user"></i>
+                                        <input type="text" id="name" name="name" placeholder="your name " required>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="email">Email Address</label>
+                                    <div class="input-icon-wrapper">
+                                        <i class="fa-regular fa-envelope"></i>
+                                        <input type="email" id="email" name="email" placeholder="example@email.com"
+                                            required>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="password">Password</label>
+                                    <div class="input-icon-wrapper">
+                                        <i class="fa-solid fa-lock"></i>
+                                        <input type="password" id="password" name="password"
+                                            placeholder="Create a password" required>
+                                        <i class="fa-regular fa-eye toggle-password"
+                                            onclick="togglePassword('password')"></i>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="confirm_password">Confirm Password</label>
+                                    <div class="input-icon-wrapper">
+                                        <i class="fa-solid fa-lock"></i>
+                                        <input type="password" id="confirm_password" name="confirm_password"
+                                            placeholder="Repeat password" required>
+                                        <i class="fa-regular fa-eye toggle-password"
+                                            onclick="togglePassword('confirm_password')"></i>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+
+                                <div class="divider">
+                                    <span>OR</span>
+                                </div>
+
+                                <p class="auth-footer">Already have an account? <a href="{{url_for('login')}}">login</a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = input.nextElementSibling;
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+</body>
+
+</html>
